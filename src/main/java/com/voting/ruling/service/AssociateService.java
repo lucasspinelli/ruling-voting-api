@@ -1,7 +1,8 @@
-package com.voting.ruling.Service;
+package com.voting.ruling.service;
 
-import com.voting.ruling.Model.Associate;
-import com.voting.ruling.Repository.AssociateRepository;
+import com.voting.ruling.model.Associate;
+import com.voting.ruling.repository.AssociateRepository;
+import com.voting.ruling.associate.controller.CpfVerification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,5 +23,10 @@ public class AssociateService {
 
     public Associate getById(Long id) {
         return associateRepository.findById(id).get();
+    }
+
+    public boolean ableToVote(String cpf){
+        CpfVerification cpfVerification = new CpfVerification();
+        return cpfVerification.isAbleToVote(cpf);
     }
 }

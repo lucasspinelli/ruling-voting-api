@@ -1,6 +1,6 @@
-package com.voting.ruling.Repository;
+package com.voting.ruling.repository;
 
-import com.voting.ruling.Model.Vote;
+import com.voting.ruling.model.Vote;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

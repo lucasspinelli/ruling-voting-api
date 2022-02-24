@@ -1,8 +1,8 @@
-package com.voting.ruling.Rest;
+package com.voting.ruling.rest;
 
-import com.voting.ruling.Form.AssociateForm;
-import com.voting.ruling.Model.Associate;
-import com.voting.ruling.Service.AssociateService;
+import com.voting.ruling.form.AssociateForm;
+import com.voting.ruling.model.Associate;
+import com.voting.ruling.service.AssociateService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +13,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
-
-import static java.util.Objects.nonNull;
 
 @RestController
 @RequestMapping("/associate")

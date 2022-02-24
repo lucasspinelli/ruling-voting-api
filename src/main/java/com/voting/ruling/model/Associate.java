@@ -1,4 +1,4 @@
-package com.voting.ruling.Model;
+package com.voting.ruling.model;
 
 import javax.persistence.*;
 import java.util.List;

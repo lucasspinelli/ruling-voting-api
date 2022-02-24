@@ -1,17 +1,15 @@
-package com.voting.ruling.Form;
+package com.voting.ruling.form;
 
-import com.voting.ruling.Model.Associate;
+import com.voting.ruling.model.Associate;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 
 public class AssociateForm {
     @NotNull @NotBlank
     private String name;
     @NotNull @NotBlank
     private String lastName;
-    @Pattern(regexp = "/^\\d{3}.\\d{3}.\\d{3}-\\d{2}$/")
     private String cpf;
 
     public AssociateForm(String name, String lastName, String cpf) {

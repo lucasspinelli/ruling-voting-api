@@ -1,6 +1,6 @@
-package com.voting.ruling.Service;
+package com.voting.ruling.service;
 
-import com.voting.ruling.Repository.VoteRepository;
+import com.voting.ruling.repository.VoteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
