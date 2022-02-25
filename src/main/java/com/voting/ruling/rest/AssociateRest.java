@@ -4,6 +4,7 @@ import com.voting.ruling.exception.BadRequestException;
 import com.voting.ruling.form.AssociateForm;
 import com.voting.ruling.model.Associate;
 import com.voting.ruling.service.AssociateService;
+import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,11 +23,13 @@ public class AssociateRest {
     @Autowired
     private AssociateService associateService;
 
+    @ApiOperation(value = "Get one list with all associates")
     @RequestMapping(path = "/list", method = RequestMethod.GET)
     public ResponseEntity associateList() {
         return ResponseEntity.ok(associateService.associateList());
     }
 
+    @ApiOperation(value = "Register one associate with cpf accepting only numbers")
     @RequestMapping(path = "/register", method = RequestMethod.POST)
     public ResponseEntity register(@Valid @RequestBody AssociateForm associateForm,
                                    UriComponentsBuilder uriComponentsBuilder) {
@@ -40,6 +43,7 @@ public class AssociateRest {
         }
     }
 
+    @ApiOperation(value = "Find associate by id")
     @RequestMapping(path = "/{id}", method = RequestMethod.GET)
     public ResponseEntity getAssociateById(@PathVariable(name = "id") Long id) {
         try {

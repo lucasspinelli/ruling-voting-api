@@ -9,6 +9,7 @@ import com.voting.ruling.model.Ruling;
 import com.voting.ruling.model.Session;
 import com.voting.ruling.service.RulingService;
 import com.voting.ruling.service.SessionService;
+import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,11 +33,13 @@ public class RulingRest {
     SessionService sessionService;
     Gson adapter = new GsonBuilder().registerTypeAdapter(Ruling.class, new RulingAdapter()).create();
 
+    @ApiOperation(value = "Get one list with all rulings")
     @RequestMapping(path = "/list", method = RequestMethod.GET)
     public ResponseEntity rulingList() {
         return ResponseEntity.ok(adapter.toJson(rulingService.rulingList()));
     }
 
+    @ApiOperation(value = "Find a ruling by id")
     @RequestMapping(path = "/{id}", method = RequestMethod.GET)
     public ResponseEntity getRulingById(
             @PathVariable Long id
@@ -50,6 +53,7 @@ public class RulingRest {
         }
     }
 
+    @ApiOperation(value = "Starts a session with the informed id on path")
     @RequestMapping(path = "/{id}/startSession", method = RequestMethod.POST)
     public ResponseEntity createRuling(@PathVariable(name = "id") Long id,
                                        @Valid @RequestBody SessionForm sessionForm) {

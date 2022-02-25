@@ -13,6 +13,7 @@ import com.voting.ruling.service.AssociateService;
 import com.voting.ruling.service.RulingService;
 import com.voting.ruling.service.SessionService;
 import com.voting.ruling.service.VoteService;
+import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,7 @@ public class SessionRest {
     @Autowired
     AssociateService associateService;
 
+    @ApiOperation(value = "Find session by id")
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity getSession(@PathVariable Long id) {
         try {
@@ -52,6 +54,7 @@ public class SessionRest {
 
     }
 
+    @ApiOperation(value = "Vote in a ruling with the informed id on path")
     @RequestMapping(value = "ruling/{rulingId}/vote", method = RequestMethod.POST)
     public ResponseEntity vote(@PathVariable Long rulingId,
                                @Valid @RequestBody VoteForm voteForm
