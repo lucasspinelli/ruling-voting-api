@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface VoteRepository  extends JpaRepository<Vote, Long> {
+    Integer countBySessionIdAndAssociateId(Long sessionId, Long rulingId);
 }
