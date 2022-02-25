@@ -1,58 +1,26 @@
 package com.voting.ruling.model;
 
 import javax.persistence.*;
-import java.util.Date;
-import java.util.List;
 
 @Entity
 public class Ruling {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
     private Long id;
 
     @Column
-    private Date creationDate = new Date();
+    private String description;
 
-    @Column
-    private double expiration = 1;
+    @OneToOne
+    private Session session;
 
-    @Column
-    private boolean active;
-
-    @OneToMany(mappedBy = "ruling", cascade = CascadeType.ALL)
-    private List<Vote> vote;
-
-    public List<Vote> getVote() {
-        return vote;
+    public Ruling() {
     }
 
-    public void setVote(List<Vote> vote) {
-        this.vote = vote;
-    }
-
-    public Date getCreationDate() {
-        return creationDate;
-    }
-
-    public void setCreationDate(Date creationDate) {
-        this.creationDate = creationDate;
-    }
-
-    public double getExpiration() {
-        return expiration;
-    }
-
-    public void setExpiration(double expiration) {
-        this.expiration = expiration;
-    }
-
-    public boolean isActive() {
-        return active;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
+    public Ruling(String description) {
+        this.description = description;
     }
 
     public Long getId() {
@@ -61,5 +29,21 @@ public class Ruling {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Session getSession() {
+        return session;
+    }
+
+    public void setSession(Session session) {
+        this.session = session;
     }
 }

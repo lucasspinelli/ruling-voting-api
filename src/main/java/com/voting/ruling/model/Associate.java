@@ -4,10 +4,11 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name="associate")
+@Table(name = "associate")
 public class Associate {
 
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private Long id;
 
@@ -23,10 +24,6 @@ public class Associate {
     @OneToMany(mappedBy = "associate")
     private List<Vote> votes;
 
-    public String getName() {
-        return name;
-    }
-
     public Associate(String cpf, String name, String lastName) {
         this.cpf = cpf;
         this.name = name;
@@ -36,16 +33,20 @@ public class Associate {
     public Associate() {
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public List<Vote> getVotes() {
         return votes;
     }
 
     public void setVotes(List<Vote> votes) {
         this.votes = votes;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getLastName() {

@@ -5,20 +5,30 @@ import javax.persistence.*;
 
 @Entity
 public class Vote {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
     private Long id;
 
     @Column
-    private boolean voteValue;
+    private String vote;
 
     @ManyToOne
     @JoinColumn(name = "id_associate")
     private Associate associate;
 
     @ManyToOne
-    @JoinColumn(name = "id_ruling")
-    private Ruling ruling;
+    @JoinColumn(name = "id_session")
+    private Session session;
+
+    public Vote() {
+    }
+
+    public Vote(String vote, Associate associate, Session session) {
+        this.vote = vote;
+        this.associate = associate;
+        this.session = session;
+    }
 
     public Associate getAssociate() {
         return associate;
@@ -28,22 +38,6 @@ public class Vote {
         this.associate = associate;
     }
 
-    public Ruling getRuling() {
-        return ruling;
-    }
-
-    public void setRuling(Ruling ruling) {
-        this.ruling = ruling;
-    }
-
-    public boolean isVoteValue() {
-        return voteValue;
-    }
-
-    public void setVoteValue(boolean voteValue) {
-        this.voteValue = voteValue;
-    }
-
     public Long getId() {
         return id;
     }
@@ -51,4 +45,21 @@ public class Vote {
     public void setId(Long id) {
         this.id = id;
     }
+
+    public Session getSession() {
+        return session;
+    }
+
+    public void setSession(Session session) {
+        this.session = session;
+    }
+
+    public String getVote() {
+        return vote;
+    }
+
+    public void setVote(String vote) {
+        this.vote = vote;
+    }
+
 }
