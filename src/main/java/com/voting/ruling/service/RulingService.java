@@ -22,7 +22,7 @@ public class RulingService {
         try {
             rulingRepository.save(ruling);
         } catch (Exception e) {
-            throw new BadRequestException(String.format("Cannot sava ruling %s", e.getMessage()));
+            throw new BadRequestException(String.format("Cannot save ruling %s", e.getMessage()));
         }
 
     }

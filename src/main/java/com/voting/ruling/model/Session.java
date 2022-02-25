@@ -10,7 +10,8 @@ import static java.util.Objects.isNull;
 @Entity
 public class Session {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @OneToOne
