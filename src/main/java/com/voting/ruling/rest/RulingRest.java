@@ -4,7 +4,10 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.voting.ruling.adapters.RulingAdapter;
 import com.voting.ruling.exception.BadRequestException;
+import com.voting.ruling.form.AssociateForm;
+import com.voting.ruling.form.RulingForm;
 import com.voting.ruling.form.SessionForm;
+import com.voting.ruling.model.Associate;
 import com.voting.ruling.model.Ruling;
 import com.voting.ruling.model.Session;
 import com.voting.ruling.service.RulingService;
@@ -16,8 +19,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
+
+import java.net.URI;
 
 import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
@@ -53,7 +59,21 @@ public class RulingRest {
         }
     }
 
-    @ApiOperation(value = "Starts a session with the informed id on path")
+    @ApiOperation(value = "Create new ruling with or without description")
+    @RequestMapping(path = "/create", method = RequestMethod.POST)
+    public ResponseEntity register(@Valid @RequestBody RulingForm rulingForm,
+                                   UriComponentsBuilder uriComponentsBuilder) {
+        Ruling ruling = rulingForm.toRuling();
+        try {
+            rulingService.save(ruling);
+            URI uri = uriComponentsBuilder.path("ruling/{id}").buildAndExpand(ruling.getId()).toUri();
+            return ResponseEntity.created(uri).body(ruling.getId());
+        } catch (Exception e) {
+            throw new BadRequestException("Cannot create ruling " + e.getMessage());
+        }
+    }
+
+    @ApiOperation(value = "Starts a session with the informed id on path return id for a session to vote")
     @RequestMapping(path = "/{id}/startSession", method = RequestMethod.POST)
     public ResponseEntity createRuling(@PathVariable(name = "id") Long id,
                                        @Valid @RequestBody SessionForm sessionForm) {
@@ -62,6 +82,7 @@ public class RulingRest {
             Ruling ruling = rulingService.getById(id);
             if (nonNull(ruling) && isNull(ruling.getSession())) {
                 Session session = new Session(sessionForm.getExpiration());
+                session.setRuling(ruling);
                 sessionService.save(session);
                 ruling.setSession(session);
                 rulingService.save(ruling);
