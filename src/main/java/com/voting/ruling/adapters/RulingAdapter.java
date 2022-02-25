@@ -21,9 +21,9 @@ public class RulingAdapter implements JsonSerializer<Ruling> {
         jsonObject.addProperty("id", ruling.getId());
         jsonObject.addProperty("description", ruling.getDescription());
 
-        if(isNull(ruling.getSession())) {
+        if (isNull(ruling.getSession())) {
             jsonObject.addProperty("status", "Session is not start yet");
-        } else if(ruling.getSession().isActive()){
+        } else if (ruling.getSession().isActive()) {
             jsonObject.addProperty("status", "Session voting in progress");
         } else {
             jsonObject.addProperty("status", "Session is done");

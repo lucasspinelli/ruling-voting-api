@@ -86,9 +86,9 @@ public class Session {
     }
 
     public String getResult() {
-        if(isNull(this.vote) || vote.isEmpty()) return "There is no vote for this session";
+        if (isNull(this.vote) || vote.isEmpty()) return "There is no vote for this session";
         Integer yes = this.vote.stream().filter(voteYes -> voteYes.getVote().equals("SIM")).collect(Collectors.toList()).size();
-        Integer no = this.vote.stream().filter(voteNo-> voteNo.getVote().equals("NÃO")).collect(Collectors.toList()).size();
+        Integer no = this.vote.stream().filter(voteNo -> voteNo.getVote().equals("NÃO")).collect(Collectors.toList()).size();
         return String.format("Sim : %d , Não : %d", yes, no);
     }
 }

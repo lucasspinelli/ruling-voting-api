@@ -1,5 +1,6 @@
 package com.voting.ruling.service;
 
+import com.voting.ruling.exception.BadRequestException;
 import com.voting.ruling.exception.NotFoundException;
 import com.voting.ruling.model.Ruling;
 import com.voting.ruling.repository.RulingRepository;
@@ -18,7 +19,12 @@ public class RulingService {
     private RulingRepository rulingRepository;
 
     public void save(Ruling ruling) {
-        rulingRepository.save(ruling);
+        try {
+            rulingRepository.save(ruling);
+        } catch (Exception e) {
+            throw new BadRequestException(String.format("Cannot sava ruling %s", e.getMessage()));
+        }
+
     }
 
     public List<Ruling> rulingList() {
