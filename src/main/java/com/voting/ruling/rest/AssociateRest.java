@@ -16,7 +16,7 @@ import javax.validation.Valid;
 import java.net.URI;
 
 @RestController
-@RequestMapping("/associate")
+@RequestMapping("/api/v1/associate")
 public class AssociateRest {
     private static final Logger LOGGER = LoggerFactory.getLogger(AssociateRest.class);
     @Autowired

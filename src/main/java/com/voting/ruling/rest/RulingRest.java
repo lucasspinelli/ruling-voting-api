@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.voting.ruling.adapters.RulingAdapter;
 import com.voting.ruling.exception.BadRequestException;
+import com.voting.ruling.form.SessionForm;
 import com.voting.ruling.model.Ruling;
 import com.voting.ruling.model.Session;
 import com.voting.ruling.service.RulingService;
@@ -13,16 +14,15 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
 
 @RestController
-@RequestMapping("/ruling")
+@RequestMapping("/api/v1/ruling")
 public class RulingRest {
     private static final Logger LOGGER = LoggerFactory.getLogger(RulingRest.class);
 
@@ -52,12 +52,12 @@ public class RulingRest {
 
     @RequestMapping(path = "/{id}/startSession", method = RequestMethod.POST)
     public ResponseEntity createRuling(@PathVariable(name = "id") Long id,
-                                       Double expiration) {
+                                       @Valid @RequestBody SessionForm sessionForm) {
         try {
             LOGGER.debug("Starting session");
             Ruling ruling = rulingService.getById(id);
             if (nonNull(ruling) && isNull(ruling.getSession())) {
-                Session session = new Session(expiration);
+                Session session = new Session(sessionForm.getExpiration());
                 sessionService.save(session);
                 ruling.setSession(session);
                 rulingService.save(ruling);

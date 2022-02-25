@@ -26,7 +26,7 @@ import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
 
 @RestController
-@RequestMapping("/session")
+@RequestMapping("/api/v1/session")
 public class SessionRest {
     private static final Logger LOGGER = LoggerFactory.getLogger(AssociateService.class);
     Gson adapter = new GsonBuilder().registerTypeAdapter(Session.class, new SessionAdapter()).create();
