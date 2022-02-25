@@ -6,9 +6,11 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 public class AssociateForm {
-    @NotNull @NotBlank
+    @NotNull
+    @NotBlank
     private String name;
-    @NotNull @NotBlank
+    @NotNull
+    @NotBlank
     private String lastName;
     private String cpf;
 
@@ -19,12 +21,12 @@ public class AssociateForm {
         this.cpf = cpf;
     }
 
-    public Associate toAssociate() {
-        return new Associate(this.cpf, this.name, this.lastName);
-    }
-
     public AssociateForm() {
 
+    }
+
+    public Associate toAssociate() {
+        return new Associate(this.cpf, this.name, this.lastName);
     }
 
     public String getName() {
