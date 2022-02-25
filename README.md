@@ -19,10 +19,20 @@
 * Input the name of "voteapi" (without quotes)
 * It's done, the database is now ready for running aplication 
 
-##!!Important 
+### !!Important 
 - The database must be on the standart port 5432, if you want to change some config, you must change application.properties as well 
 
 - Clone this repository, and run it on your IDE, then you can test all routes with postman or insomnia
 
-##Documentation: 
+### Documentation: 
 - To see all routes and the request body/params, after run application access http://localhost:8080/swagger-ui.html
+
+### How to use 
+* Step 1: You must register a new associate with a valid CPF
+* Step 2: You must to create some ruling that you can vote
+* Step 3: Now with your ruling created, you need to open a vote session, you can define a expiration time. The standart is 1min
+* Step 4: Vote! Acess the vote route, input next to your CPF the vote and post it to your session.
+* Step 4: You can follow the results in that session, you just need to make a get method
+* Vote formats in string:
+ * * For yes: 'y', 'yes', 's', 'sim'
+ * * for no: 'n', 'nao', 'no', 'não'
