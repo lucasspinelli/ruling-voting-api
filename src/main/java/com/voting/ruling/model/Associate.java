@@ -7,7 +7,7 @@ import java.util.List;
 public class Associate {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
@@ -19,6 +19,7 @@ public class Associate {
 
     @Column
     private String lastName;
+
 
     public Associate(String cpf, String name, String lastName) {
         this.cpf = cpf;
