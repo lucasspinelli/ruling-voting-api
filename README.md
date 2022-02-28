@@ -17,10 +17,19 @@
 * Input your password
 * Right click on "Servers" -> "Create" 
 * Input the name of "voteapi" (without quotes)
-* It's done, the database is now ready for running aplication 
 
 ### !!Important 
 - The database must be on the standart port 5432, if you want to change some config, you must change application.properties as well 
+
+### Instalation
+```shell script
+$ git clone https://github.com/lucasspinelli/ruling-voting-api.git
+$ cd ruling-voting-api
+$ mvn package 
+$ cd target 
+$ java -jar {name of the file .jar generated}
+
+```
 
 - Clone this repository, and run it on your IDE, then you can test all routes with postman or insomnia
 
