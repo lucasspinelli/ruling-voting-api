@@ -26,7 +26,7 @@ public class AssociateRest {
     @ApiOperation(value = "Get one list with all associates")
     @RequestMapping(path = "/list", method = RequestMethod.GET)
     public ResponseEntity associateList() {
-        return ResponseEntity.ok(associateService.associateList());
+        return ResponseEntity.status(HttpStatus.valueOf(200)).body(associateService.associateList());
     }
 
     @ApiOperation(value = "Register one associate with cpf accepting only numbers")
