@@ -20,9 +20,6 @@ public class Associate {
     @Column
     private String lastName;
 
-    @OneToMany(mappedBy = "associate")
-    private List<Vote> votes;
-
     public Associate(String cpf, String name, String lastName) {
         this.cpf = cpf;
         this.name = name;
@@ -38,14 +35,6 @@ public class Associate {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public List<Vote> getVotes() {
-        return votes;
-    }
-
-    public void setVotes(List<Vote> votes) {
-        this.votes = votes;
     }
 
     public String getLastName() {
