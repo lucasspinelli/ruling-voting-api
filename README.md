@@ -1,4 +1,11 @@
 # Ruling voting api
+* Rest API for ruling management
+
+##Objectives 
+* Create new ruling 
+* Open a vote session for that ruling, that will be open for one minute by default, but you can change the open time
+* Receive associate votes, associates have an unique id and they can compute one vote per ruling
+* Account the votes and give the result 
 
 ## Requirements
 
