@@ -41,7 +41,7 @@ public class SessionRest {
     @Autowired
     AssociateService associateService;
 
-    @ApiOperation(value = "Find session by id")
+    @ApiOperation(value = "Find session by id, here we can see the vote result")
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity getSession(@PathVariable Long id) {
         try {

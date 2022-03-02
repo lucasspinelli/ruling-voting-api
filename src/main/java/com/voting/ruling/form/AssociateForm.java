@@ -1,6 +1,7 @@
 package com.voting.ruling.form;
 
 import com.voting.ruling.model.Associate;
+import io.swagger.annotations.ApiModelProperty;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -8,10 +9,13 @@ import javax.validation.constraints.NotNull;
 public class AssociateForm {
     @NotNull
     @NotBlank
+    @ApiModelProperty(value = "Associate Name")
     private String name;
     @NotNull
     @NotBlank
+    @ApiModelProperty(value = "Associate Last Name")
     private String lastName;
+    @ApiModelProperty(value = "Associate CPF")
     private String cpf;
 
     public AssociateForm(String name, String lastName, String cpf) {
