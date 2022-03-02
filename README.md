@@ -5,27 +5,24 @@
 * Git
 * Java 11
 * IntelliJ Community
-* Postgres
+* MySQL server
 
 ## DataBase
 
-### Postgres
+### MySQL
 ### Configuration : 
-* Firts get postgres [Here](https://www.postgresql.org/download/)
-* Folow the instalation and define a password, the standart is User : postgres Password : postgres
-* After the instalation open pgAdmin4 
-* Input your password
-* Right click on "Servers" -> "Create" 
-* Input the name of "voteapi" (without quotes)
+* First get mysql server [Here](https://dev.mysql.com/downloads/mysql/)
+* Follow the installation and define a password, the standard is User : root Password : (empty) 
+* After the installation the application will create database if it not exists
 
 ### !!Important 
-- The database must be on the standart port 5432, if you want to change some config, you must change application.properties as well 
+- The database must be on the standard port 3306, if you want to change some config, you must change application.properties as well 
 
 ### Instalation
 ```shell script
 $ git clone https://github.com/lucasspinelli/ruling-voting-api.git
 $ cd ruling-voting-api
-$ mvn package 
+$ mvn clean package -Dmaven.test.skip
 $ cd target 
 $ java -jar {name of the file .jar generated}
 
@@ -39,7 +36,7 @@ $ java -jar {name of the file .jar generated}
 ### How to use 
 * Step 1: You must register a new associate with a valid CPF
 * * use route /api/{version}/associate/register
-* Step 2: You must to create some ruling that you can vote
+* Step 2: You must create some ruling that you can vote
 * * use route /api/{version}/ruling/create it will return the session id linked in this ruligin
 * Step 3: Now with your ruling created, you need to open a vote session, you can define a expiration time. The standart is 1min
 * * use route /api/{version}/ruling/{session-id}/startSession
