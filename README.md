@@ -1,7 +1,7 @@
 # Ruling voting api
 * Rest API for ruling management
 
-##Objectives 
+## Objectives 
 * Create new ruling 
 * Open a vote session for that ruling, that will be open for one minute by default, but you can change the open time
 * Receive associate votes, associates have an unique id and they can compute one vote per ruling
@@ -11,6 +11,7 @@
 
 * Git
 * Java 11
+* Maven
 * IntelliJ Community
 * MySQL server
 
