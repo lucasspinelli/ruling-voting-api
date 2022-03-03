@@ -42,7 +42,7 @@ $ java -jar {name of the file .jar generated}
 - To see all routes and the request body/params, after run application access http://localhost:8080/swagger-ui.html
 
 ### Cloud 
-- Application runing in AWS EC2, for online doc and testing you can click [Here](http://ec2-3-142-221-48.us-east-2.compute.amazonaws.com:8080/swagger-ui.html)
+- Application runing in AWS EC2, for online doc and testing you can click [Here](http://ec2-52-15-253-234.us-east-2.compute.amazonaws.com:8080/swagger-ui.html#/)
 
 ### How to use 
 * Step 1: You must register a new associate with a valid CPF
