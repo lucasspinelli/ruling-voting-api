@@ -4,10 +4,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.voting.ruling.adapters.RulingAdapter;
 import com.voting.ruling.exception.BadRequestException;
-import com.voting.ruling.form.AssociateForm;
 import com.voting.ruling.form.RulingForm;
 import com.voting.ruling.form.SessionForm;
-import com.voting.ruling.model.Associate;
 import com.voting.ruling.model.Ruling;
 import com.voting.ruling.model.Session;
 import com.voting.ruling.service.RulingService;
@@ -22,7 +20,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
-
 import java.net.URI;
 
 import static java.util.Objects.isNull;
@@ -78,7 +75,7 @@ public class RulingRest {
     public ResponseEntity createRuling(@PathVariable(name = "id") Long id,
                                        @Valid @RequestBody SessionForm sessionForm) {
         try {
-            LOGGER.debug("Starting session");
+            LOGGER.info("Starting session");
             Ruling ruling = rulingService.getById(id);
             if (nonNull(ruling) && isNull(ruling.getSession())) {
                 Session session = new Session(sessionForm.getExpiration());

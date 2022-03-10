@@ -13,7 +13,7 @@ import java.util.Date;
 import static java.util.Objects.nonNull;
 
 public class SessionAdapter implements JsonSerializer<Session> {
-    /**
+    /*
      * Json object serializer
      * Facilitates object manipulation
      */

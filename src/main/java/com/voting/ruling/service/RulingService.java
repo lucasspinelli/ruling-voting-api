@@ -33,7 +33,7 @@ public class RulingService {
 
     public Ruling getById(Long id) {
         try {
-            LOGGER.debug("Trying to find ruling with id " + id);
+            LOGGER.info("Trying to find ruling with id " + id);
             return rulingRepository.findById(id).get();
         } catch (Exception e) {
             throw new NotFoundException(String.format("Cannot find ruling with id %d %s", id, e.getMessage()));

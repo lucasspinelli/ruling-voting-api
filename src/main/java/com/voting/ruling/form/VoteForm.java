@@ -7,11 +7,13 @@ import javax.validation.constraints.NotNull;
 
 public class VoteForm {
 
-    @NotNull @NotBlank
+    @NotNull
+    @NotBlank
     @ApiModelProperty(value = "Associate CPF that will vote")
     private String cpf;
 
-    @NotNull @NotBlank
+    @NotNull
+    @NotBlank
     @ApiModelProperty(value = "Vote value receive : 'yes' 'no' 'n' 'y' 'sim' 'nao' 'não' 's' upper and lower case is received as well ")
     private String vote;
 

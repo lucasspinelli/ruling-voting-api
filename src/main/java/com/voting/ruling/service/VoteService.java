@@ -17,9 +17,9 @@ public class VoteService {
 
     public void vote(Vote vote) {
         try {
-            LOGGER.debug("Computing vote...");
+            LOGGER.info("Computing vote...");
             voteRepository.save(vote);
-            LOGGER.debug("The vote has been submitted");
+            LOGGER.info("The vote has been submitted");
         } catch (Exception e) {
             throw new BadRequestException(String.format("We can't compute the vote with id %d %s", vote.getId(), e.getMessage()));
         }

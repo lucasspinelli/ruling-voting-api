@@ -1,7 +1,6 @@
 package com.voting.ruling.model;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 public class Associate {

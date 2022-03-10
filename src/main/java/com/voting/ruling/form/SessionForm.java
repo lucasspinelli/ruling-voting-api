@@ -11,15 +11,15 @@ public class SessionForm {
         this.expiration = expiration;
     }
 
+    public SessionForm() {
+
+    }
+
     public Double getExpiration() {
         return expiration;
     }
 
     public void setExpiration(Double expiration) {
         this.expiration = expiration;
-    }
-
-    public SessionForm() {
-
     }
 }

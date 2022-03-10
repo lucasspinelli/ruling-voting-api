@@ -43,7 +43,7 @@ public class AssociateService {
     }
 
     public boolean ableToVote(String cpf) {
-        LOGGER.debug("Starting cpf validation");
+        LOGGER.info("Starting cpf validation");
         CpfVerification cpfVerification = new CpfVerification();
         return cpfVerification.isAbleToVote(cpf);
     }

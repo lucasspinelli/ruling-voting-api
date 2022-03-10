@@ -2,17 +2,22 @@ package com.voting.ruling.service;
 
 import com.voting.ruling.exception.BadRequestException;
 import com.voting.ruling.exception.NotFoundException;
+import com.voting.ruling.form.VoteForm;
+import com.voting.ruling.model.Associate;
 import com.voting.ruling.model.Ruling;
 import com.voting.ruling.model.Session;
+import com.voting.ruling.model.Vote;
 import com.voting.ruling.repository.SessionRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
 
+import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
 
 @Service
@@ -36,7 +41,7 @@ public class SessionService {
 
     public boolean verifyExpired(Session session) {
         try {
-            LOGGER.debug("Verifying expired session");
+            LOGGER.info("Verifying expired session");
             return (new Date()).getTime() - session.getCreationDate().getTime() > session.getExpiration();
         } catch (Exception e) {
             throw new BadRequestException(String.format("Cannot verify expiration status for session %d %s", session.getId(), e.getMessage()));
@@ -50,7 +55,7 @@ public class SessionService {
 
     public Session getById(Long id) {
         try {
-            LOGGER.debug("Trying to find session with id " + id);
+            LOGGER.info("Trying to find session with id " + id);
             return sessionRepository.findById(id).get();
         } catch (Exception e) {
             throw new NotFoundException(String.format("Cannot find Session with id %d %s", id, e.getMessage()));
@@ -64,4 +69,31 @@ public class SessionService {
         else return null;
     }
 
+    public ResponseEntity validateVoteSession(Long rulingId, VoteForm voteForm, AssociateService associateService,
+                                              RulingService rulingService, VoteService voteService) {
+        String validVote = this.validateVote(voteForm.getVote());
+        if (nonNull(validVote)) {
+            //Validate Associate
+            Associate associate = associateService.findAssociateByCpf(voteForm.getCpf());
+            if (isNull(associate)) return ResponseEntity.badRequest().body("Cannot find associate with this cpf");
+
+            //Validate ruling
+            Ruling ruling = rulingService.getById(rulingId);
+            if (isNull(ruling)) return ResponseEntity.badRequest().body("No ruling found with the id: " + rulingId);
+
+            //Validate session
+            if (isNull(ruling.getSession())) return ResponseEntity.badRequest().body("Session is not started");
+            if (!(ruling.getSession().isActive())) return ResponseEntity.badRequest().body("Session is closed");
+
+            //Validate vote
+            Integer countVote = voteService.countBySessionIdAndAssociateId(ruling.getSession().getId(), associate.getId());
+            if (countVote > 0) {
+                return ResponseEntity.badRequest().body("You already voted for this ruling");
+            }
+            Vote newVote = new Vote(validVote, associate, ruling.getSession());
+            voteService.vote(newVote);
+            return ResponseEntity.ok().body("Vote is computed");
+        }
+        return ResponseEntity.badRequest().body("The input vote is not valid");
+    }
 }
